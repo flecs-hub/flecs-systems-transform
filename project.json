@@ -1,0 +1,13 @@
+{
+    "id": "reflecs.systems.transform",
+    "type": "package",
+    "value": {
+        "author": "Sander Mertens",
+        "description": "Transform systems for reflecs",
+        "use": [
+            "reflecs",
+            "reflecs.math",
+            "reflecs.components.transform"
+        ]
+    }
+}
