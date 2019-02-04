@@ -7,7 +7,7 @@ void EcsAddMatTransform2D(EcsRows *rows) {
     void *row;
     for (row = rows->first; row < rows->last; row = ecs_next(rows, row)) {
         EcsEntity entity = ecs_entity(rows, row, ECS_ROW_ENTITY);
-        ecs_add(world, entity, EcsMatTransform2D_h);
+        ecs_set_ptr(world, entity, EcsMatTransform2D_h, &ECS_MAT3X3_IDENTITY);
     }
 }
 
@@ -85,7 +85,6 @@ void EcsTransform2D(EcsRows *rows) {
     ecs_run_w_filter(world, EcsTransformChildren2D_h, dt, 0, 0, root, NULL);
 }
 
-
 void EcsSystemsTransform(
     EcsWorld *world,
     int flags,
@@ -96,7 +95,7 @@ void EcsSystemsTransform(
     ECS_IMPORT(world, EcsComponentsTransform, flags);
 
     /* System that adds transform matrix to every entity with transformations */
-    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D);
+    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsRoot | EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D);
     ecs_add(world, EcsAddMatTransform2D_h, EcsHidden_h);
 
     /* Systems that add transformations to transform matrix */
