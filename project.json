@@ -1,13 +1,13 @@
 {
-    "id": "reflecs.systems.transform",
+    "id": "flecs.systems.transform",
     "type": "package",
     "value": {
         "author": "Sander Mertens",
-        "description": "Transform systems for reflecs",
+        "description": "Transform systems for flecs",
         "use": [
-            "reflecs",
-            "reflecs.math",
-            "reflecs.components.transform"
+            "flecs",
+            "flecs.math",
+            "flecs.components.transform"
         ]
     }
 }

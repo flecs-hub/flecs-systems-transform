@@ -1,5 +1,5 @@
-#ifndef REFLECS_SYSTEMS_TRANSFORM_H
-#define REFLECS_SYSTEMS_TRANSFORM_H
+#ifndef FLECS_SYSTEMS_TRANSFORM_H
+#define FLECS_SYSTEMS_TRANSFORM_H
 
 #include "bake_config.h"
 
@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 typedef struct EcsSystemsTransformHandles {
-   EcsEntity Transform2D;
+   ECS_DECLARE_COMPONENT(EcsTransform2D);
 } EcsSystemsTransformHandles;
 
 void EcsSystemsTransform(
@@ -16,7 +16,7 @@ void EcsSystemsTransform(
     int flags,
     void *handles_out);
 
-#define EcsSystemsTransform_DeclareHandles(handles)\
-    EcsDeclareHandle(handles, Transform2D);
+#define EcsSystemsTransform_ImportHandles(handles)\
+    ECS_IMPORT_COMPONENT(handles, EcsTransform2D);
 
 #endif
