@@ -69,7 +69,7 @@ void EcsSystemsTransform(
     ECS_IMPORT(world, EcsComponentsTransform, flags);
 
     /* System that adds transform matrix to every entity with transformations */
-    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsRoot | EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D, SYSTEM.EcsHidden);
 
     /* Systems that add transformations to transform matrix */
     ECS_SYSTEM(world, EcsApplyTranslation2D, EcsOnFrame, EcsMatTransform2D, EcsPosition2D, SYSTEM.EcsHidden);
