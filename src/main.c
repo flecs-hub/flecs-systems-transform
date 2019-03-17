@@ -80,7 +80,7 @@ void EcsSystemsTransform(
     ECS_SYSTEM(world, EcsInitTransformChildren2D, EcsPreFrame, EcsMatTransform2D, CONTAINER.EcsMatTransform2D, SYSTEM.EcsHidden);
 
     /* Reset transformation */
-    ECS_SYSTEM(world, EcsResetTransform2D, EcsOnFrame, EcsMatTransform2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsResetTransform2D, EcsPreFrame, EcsMatTransform2D, SYSTEM.EcsHidden);
 
     ECS_TYPE(world, EcsTransform2D, 
         EcsApplyTranslation2D, 
