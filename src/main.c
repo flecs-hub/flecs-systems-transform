@@ -72,9 +72,9 @@ void EcsSystemsTransform(
     ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D, SYSTEM.EcsHidden);
 
     /* Systems that add transformations to transform matrix */
-    ECS_SYSTEM(world, EcsApplyTranslation2D, EcsOnFrame, EcsMatTransform2D, EcsPosition2D, SYSTEM.EcsHidden);
-    ECS_SYSTEM(world, EcsApplyRotation2D, EcsOnFrame, EcsMatTransform2D, EcsRotation2D, SYSTEM.EcsHidden);
-    ECS_SYSTEM(world, EcsApplyScaling2D, EcsOnFrame, EcsMatTransform2D, EcsScale2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyTranslation2D, EcsPostFrame, EcsMatTransform2D, EcsPosition2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyRotation2D, EcsPostFrame, EcsMatTransform2D, EcsRotation2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyScaling2D, EcsPostFrame, EcsMatTransform2D, EcsScale2D, SYSTEM.EcsHidden);
 
     /* Copy transformation from parent to child entities */
     ECS_SYSTEM(world, EcsInitTransformChildren2D, EcsPreFrame, EcsMatTransform2D, CONTAINER.EcsMatTransform2D, SYSTEM.EcsHidden);
