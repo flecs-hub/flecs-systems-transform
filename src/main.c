@@ -5,7 +5,7 @@ void EcsAddMatTransform2D(EcsRows *rows) {
     EcsType TEcsMatTransform2D = ecs_column_type(rows, 2);
 
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         ecs_set_ptr(world, rows->entities[i], EcsMatTransform2D, &ECS_MAT3X3_IDENTITY);
     }
 }
@@ -15,7 +15,7 @@ void EcsInitTransformChildren2D(EcsRows *rows) {
     EcsMatTransform2D *m_container = ecs_column(rows, EcsMatTransform2D, 2);
 
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         m[i] = *m_container;
     }
 }
@@ -25,7 +25,7 @@ void EcsApplyTranslation2D(EcsRows *rows) {
     EcsPosition2D *p = ecs_column(rows, EcsPosition2D, 2);
     
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         ecs_mat3x3_add_translation(&m[i], &p[i]);
     }
 }
@@ -35,7 +35,7 @@ void EcsApplyRotation2D(EcsRows *rows) {
     EcsRotation2D *r = ecs_column(rows, EcsRotation2D, 2);
 
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         ecs_mat3x3_add_rotation(&m[i], r[i].angle);
     }
 }
@@ -45,7 +45,7 @@ void EcsApplyScaling2D(EcsRows *rows) {
     EcsScale2D *s = ecs_column(rows, EcsScale2D, 2);
 
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         ecs_mat3x3_add_scale(&m[i], &s[i]);
     }
 }
@@ -54,7 +54,7 @@ void EcsResetTransform2D(EcsRows *rows) {
     EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
 
     int i;
-    for (i = rows->begin; i < rows->end; i ++) {
+    for (i = 0; i < rows->count; i ++) {
         m[i] = ECS_MAT3X3_IDENTITY;
     }
 }
