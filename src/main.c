@@ -2,7 +2,7 @@
 
 void EcsAddMatTransform2D(ecs_rows_t *rows) {
     ecs_world_t *world = rows->world;
-    EcsType TEcsMatTransform2D = ecs_column_type(rows, 2);
+    ecs_type_t TEcsMatTransform2D = ecs_column_type(rows, 2);
 
     int i;
     for (i = 0; i < rows->count; i ++) {
