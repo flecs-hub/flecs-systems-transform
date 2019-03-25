@@ -1,7 +1,7 @@
 #include <include/transform.h>
 
-void EcsAddMatTransform2D(EcsRows *rows) {
-    EcsWorld *world = rows->world;
+void EcsAddMatTransform2D(ecs_rows_t *rows) {
+    ecs_world_t *world = rows->world;
     EcsType TEcsMatTransform2D = ecs_column_type(rows, 2);
 
     int i;
@@ -10,7 +10,7 @@ void EcsAddMatTransform2D(EcsRows *rows) {
     }
 }
 
-void EcsInitTransformChildren2D(EcsRows *rows) {
+void EcsInitTransformChildren2D(ecs_rows_t *rows) {
     EcsMatTransform2D *m = ecs_shared(rows, EcsMatTransform2D, 1);
     EcsMatTransform2D *m_container = ecs_column(rows, EcsMatTransform2D, 2);
 
@@ -20,7 +20,7 @@ void EcsInitTransformChildren2D(EcsRows *rows) {
     }
 }
 
-void EcsApplyTranslation2D(EcsRows *rows) {
+void EcsApplyTranslation2D(ecs_rows_t *rows) {
     EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
     EcsPosition2D *p = ecs_column(rows, EcsPosition2D, 2);
     
@@ -30,7 +30,7 @@ void EcsApplyTranslation2D(EcsRows *rows) {
     }
 }
 
-void EcsApplyRotation2D(EcsRows *rows) {
+void EcsApplyRotation2D(ecs_rows_t *rows) {
     EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
     EcsRotation2D *r = ecs_column(rows, EcsRotation2D, 2);
 
@@ -40,7 +40,7 @@ void EcsApplyRotation2D(EcsRows *rows) {
     }
 }
 
-void EcsApplyScaling2D(EcsRows *rows) {
+void EcsApplyScaling2D(ecs_rows_t *rows) {
     EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
     EcsScale2D *s = ecs_column(rows, EcsScale2D, 2);
 
@@ -50,7 +50,7 @@ void EcsApplyScaling2D(EcsRows *rows) {
     }
 }
 
-void EcsResetTransform2D(EcsRows *rows) {
+void EcsResetTransform2D(ecs_rows_t *rows) {
     EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
 
     int i;
@@ -60,7 +60,7 @@ void EcsResetTransform2D(EcsRows *rows) {
 }
 
 void EcsSystemsTransform(
-    EcsWorld *world,
+    ecs_world_t *world,
     int flags,
     void *handles_out)
 {
