@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 typedef struct EcsSystemsTransformHandles {
-   ECS_DECLARE_COMPONENT(EcsTransform2D);
+   ECS_DECLARE_ENTITY(EcsTransform2D);
 } EcsSystemsTransformHandles;
 
 void EcsSystemsTransform(
@@ -17,6 +17,6 @@ void EcsSystemsTransform(
     void *handles_out);
 
 #define EcsSystemsTransform_ImportHandles(handles)\
-    ECS_IMPORT_COMPONENT(handles, EcsTransform2D);
+    ECS_IMPORT_ENTITY(handles, EcsTransform2D);
 
 #endif

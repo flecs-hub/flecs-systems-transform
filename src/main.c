@@ -89,5 +89,5 @@ void EcsSystemsTransform(
         EcsInitTransformChildren2D, 
         EcsResetTransform2D);
 
-    ECS_SET_COMPONENT(handles, EcsTransform2D);
+    ECS_SET_ENTITY(handles, EcsTransform2D);
 }
