@@ -11,7 +11,7 @@ void EcsAddMatTransform2D(ecs_rows_t *rows) {
 }
 
 void EcsInitTransformChildren2D(ecs_rows_t *rows) {
-    EcsMatTransform2D *m = ecs_shared(rows, EcsMatTransform2D, 1);
+    EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
     EcsMatTransform2D *m_container = ecs_column(rows, EcsMatTransform2D, 2);
 
     int i;
@@ -72,15 +72,15 @@ void EcsSystemsTransform(
     ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, EcsPosition2D | EcsRotation2D | EcsScale2D, !EcsMatTransform2D, SYSTEM.EcsHidden);
 
     /* Systems that add transformations to transform matrix */
-    ECS_SYSTEM(world, EcsApplyTranslation2D, EcsPostFrame, EcsMatTransform2D, EcsPosition2D, SYSTEM.EcsHidden);
-    ECS_SYSTEM(world, EcsApplyRotation2D, EcsPostFrame, EcsMatTransform2D, EcsRotation2D, SYSTEM.EcsHidden);
-    ECS_SYSTEM(world, EcsApplyScaling2D, EcsPostFrame, EcsMatTransform2D, EcsScale2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyTranslation2D, EcsOnValidate, EcsMatTransform2D, EcsPosition2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyRotation2D, EcsOnValidate, EcsMatTransform2D, EcsRotation2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsApplyScaling2D, EcsOnValidate, EcsMatTransform2D, EcsScale2D, SYSTEM.EcsHidden);
 
     /* Copy transformation from parent to child entities */
-    ECS_SYSTEM(world, EcsInitTransformChildren2D, EcsPreFrame, EcsMatTransform2D, CONTAINER.EcsMatTransform2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsInitTransformChildren2D, EcsPreUpdate, EcsMatTransform2D, CONTAINER.EcsMatTransform2D, SYSTEM.EcsHidden);
 
     /* Reset transformation */
-    ECS_SYSTEM(world, EcsResetTransform2D, EcsPreFrame, EcsMatTransform2D, SYSTEM.EcsHidden);
+    ECS_SYSTEM(world, EcsResetTransform2D, EcsPreUpdate, EcsMatTransform2D, SYSTEM.EcsHidden);
 
     ECS_TYPE(world, EcsTransform2D, 
         EcsApplyTranslation2D, 

@@ -17,6 +17,10 @@
 #ifndef FLECS_SYSTEMS_TRANSFORM_BAKE_CONFIG_H
 #define FLECS_SYSTEMS_TRANSFORM_BAKE_CONFIG_H
 
+/* Generated includes are specific to the bake environment. If a project is not
+ * built with bake, it will have to provide alternative methods for including
+ * its dependencies. */
+#ifdef __BAKE__
 /* Headers of public dependencies */
 #include <flecs>
 #include <flecs.math>
@@ -26,16 +30,21 @@
 #ifdef FLECS_SYSTEMS_TRANSFORM_IMPL
 /* No dependencies */
 #endif
+#endif
 
 /* Convenience macro for exporting symbols */
-#if FLECS_SYSTEMS_TRANSFORM_IMPL && defined _MSC_VER
-#define FLECS_SYSTEMS_TRANSFORM_EXPORT __declspec(dllexport)
-#elif FLECS_SYSTEMS_TRANSFORM_IMPL
-#define FLECS_SYSTEMS_TRANSFORM_EXPORT __attribute__((__visibility__("default")))
-#elif defined _MSC_VER
-#define FLECS_SYSTEMS_TRANSFORM_EXPORT __declspec(dllimport)
+#ifndef FLECS_SYSTEMS_TRANSFORM_STATIC
+  #if FLECS_SYSTEMS_TRANSFORM_IMPL && defined _MSC_VER
+    #define FLECS_SYSTEMS_TRANSFORM_EXPORT __declspec(dllexport)
+  #elif FLECS_SYSTEMS_TRANSFORM_IMPL
+    #define FLECS_SYSTEMS_TRANSFORM_EXPORT __attribute__((__visibility__("default")))
+  #elif defined _MSC_VER
+    #define FLECS_SYSTEMS_TRANSFORM_EXPORT __declspec(dllimport)
+  #else
+    #define FLECS_SYSTEMS_TRANSFORM_EXPORT
+  #endif
 #else
-#define FLECS_SYSTEMS_TRANSFORM_EXPORT
+  #define FLECS_SYSTEMS_TRANSFORM_EXPORT
 #endif
 
 #endif
