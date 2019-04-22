@@ -45,14 +45,12 @@ void EcsApplyTransform2D(ecs_rows_t *rows) {
     }
 }
 
-void EcsSystemsTransform(
+void FlecsSystemsTransformImport(
     ecs_world_t *world,
-    int flags,
-    void *handles_out)
+    int flags)
 {
-    EcsSystemsTransformHandles *handles = handles_out;
-
-    ECS_IMPORT(world, EcsComponentsTransform, flags);
+    ECS_IMPORT(world, FlecsComponentsTransform, flags);
+    ECS_MODULE(world, FlecsSystemsTransform);
 
     /* System that adds transform matrix to every entity with transformations */
     ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, 

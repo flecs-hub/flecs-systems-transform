@@ -7,16 +7,15 @@
 extern "C" {
 #endif
 
-typedef struct EcsSystemsTransformHandles {
+typedef struct FlecsSystemsTransform {
    ECS_DECLARE_ENTITY(EcsTransform2D);
-} EcsSystemsTransformHandles;
+} FlecsSystemsTransform;
 
-void EcsSystemsTransform(
+void FlecsSystemsTransformImport(
     ecs_world_t *world,
-    int flags,
-    void *handles_out);
+    int flags);
 
-#define EcsSystemsTransform_ImportHandles(handles)\
+#define FlecsSystemsTransformImportHandles(handles)\
     ECS_IMPORT_ENTITY(handles, EcsTransform2D);
 
 #endif
