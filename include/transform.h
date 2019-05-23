@@ -19,4 +19,7 @@ void FlecsSystemsTransformImport(
 #define FlecsSystemsTransformImportHandles(handles)\
     ECS_IMPORT_ENTITY(handles, EcsTransform2D);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
