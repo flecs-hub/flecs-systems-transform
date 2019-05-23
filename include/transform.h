@@ -11,6 +11,7 @@ typedef struct FlecsSystemsTransform {
    ECS_DECLARE_ENTITY(EcsTransform2D);
 } FlecsSystemsTransform;
 
+FLECS_SYSTEMS_TRANSFORM_EXPORT
 void FlecsSystemsTransformImport(
     ecs_world_t *world,
     int flags);
