@@ -1,4 +1,4 @@
-#include <include/transform.h>
+#include <flecs_systems_transform.h>
 
 void EcsAddMatTransform2D(ecs_rows_t *rows) {
     ecs_world_t *world = rows->world;
@@ -29,9 +29,7 @@ void EcsApplyTransform2D(ecs_rows_t *rows) {
     }
 
     if (p) {
-        for (i = 0; i < rows->count; i ++) {
-            ecs_mat3x3_add_translation(&m[i], &p[i]);
-        }
+        ecs_mat3x3_addn_translation(m, p, rows->count);
     } else {
         p = ecs_shared(rows, EcsPosition2D, 2);
         for (i = 0; i < rows->count; i ++) {
@@ -40,9 +38,11 @@ void EcsApplyTransform2D(ecs_rows_t *rows) {
     }
 
     if (r) {
-        for (i = 0; i < rows->count; i ++) {
+        ecs_mat3x3_addn_rotation(m, (float*)r, rows->count);
+
+        /*for (i = 0; i < rows->count; i ++) {
             ecs_mat3x3_add_rotation(&m[i], r[i].angle);
-        }
+        }*/
     }
 
     if (s) {

@@ -1,7 +1,7 @@
 #ifndef FLECS_SYSTEMS_TRANSFORM_H
 #define FLECS_SYSTEMS_TRANSFORM_H
 
-#include "bake_config.h"
+#include <flecs-systems-transform/bake_config.h>
 
 #ifdef __cplusplus
 extern "C" {
