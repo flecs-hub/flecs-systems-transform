@@ -11,11 +11,11 @@ void EcsAddMatTransform2D(ecs_rows_t *rows) {
 }
 
 void EcsApplyTransform2D(ecs_rows_t *rows) {
-    EcsMatTransform2D *m = ecs_column(rows, EcsMatTransform2D, 1);
-    EcsPosition2D *p = ecs_column_test(rows, EcsPosition2D, 2);
-    EcsRotation2D *r = ecs_column_test(rows, EcsRotation2D, 3);
-    EcsScale2D *s = ecs_column_test(rows, EcsScale2D, 4);
-    EcsMatTransform2D *m_parent = ecs_shared_test(rows, EcsMatTransform2D, 5);
+    ECS_COLUMN(rows, EcsMatTransform2D, m, 1);
+    ECS_COLUMN(rows, EcsPosition2D, p, 2);
+    ECS_COLUMN(rows, EcsRotation2D, r, 3);
+    ECS_COLUMN(rows, EcsScale2D, s, 4);
+    ECS_COLUMN(rows, EcsMatTransform2D, m_parent, 5);
     int i;
 
     if (!m_parent) {
@@ -28,10 +28,9 @@ void EcsApplyTransform2D(ecs_rows_t *rows) {
         }
     }
 
-    if (p) {
+    if (!ecs_is_shared(rows, 2)) {
         ecs_mat3x3_addn_translation(m, p, rows->count);
     } else {
-        p = ecs_shared(rows, EcsPosition2D, 2);
         for (i = 0; i < rows->count; i ++) {
             ecs_mat3x3_add_translation(&m[i], p);
         }        
