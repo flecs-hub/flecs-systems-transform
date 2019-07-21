@@ -38,10 +38,6 @@ void EcsApplyTransform2D(ecs_rows_t *rows) {
 
     if (r) {
         ecs_mat3x3_addn_rotation(m, (float*)r, rows->count);
-
-        /*for (i = 0; i < rows->count; i ++) {
-            ecs_mat3x3_add_rotation(&m[i], r[i].angle);
-        }*/
     }
 
     if (s) {
@@ -61,7 +57,7 @@ void FlecsSystemsTransformImport(
     /* System that adds transform matrix to every entity with transformations */
     ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, 
         EcsPosition2D | EcsRotation2D | EcsScale2D, 
-        !EcsMatTransform2D, 
+        !OWNED.EcsMatTransform2D, 
         SYSTEM.EcsHidden);
 
     ECS_SYSTEM(world, EcsApplyTransform2D, EcsOnValidate, 
