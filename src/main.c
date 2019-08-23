@@ -72,5 +72,5 @@ void FlecsSystemsTransformImport(
         EcsAddMatTransform2D, 
         EcsApplyTransform2D);
 
-    ECS_SET_ENTITY(handles, EcsTransform2D);
+    ECS_SET_ENTITY(EcsTransform2D);
 }
