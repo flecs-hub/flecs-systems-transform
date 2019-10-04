@@ -55,7 +55,7 @@ void FlecsSystemsTransformImport(
     ECS_MODULE(world, FlecsSystemsTransform);
 
     /* System that adds transform matrix to every entity with transformations */
-    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsOnLoad, 
+    ECS_SYSTEM(world, EcsAddMatTransform2D, EcsPostLoad, 
         EcsPosition2D | EcsRotation2D | EcsScale2D, 
         !OWNED.EcsMatTransform2D, 
         SYSTEM.EcsHidden);
