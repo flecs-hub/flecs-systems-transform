@@ -8,16 +8,14 @@ extern "C" {
 #endif
 
 typedef struct FlecsSystemsTransform {
-   ECS_DECLARE_ENTITY(EcsTransform2D);
+   int dummy;
 } FlecsSystemsTransform;
 
 FLECS_SYSTEMS_TRANSFORM_EXPORT
 void FlecsSystemsTransformImport(
-    ecs_world_t *world,
-    int flags);
+    ecs_world_t *world);
 
-#define FlecsSystemsTransformImportHandles(handles)\
-    ECS_IMPORT_ENTITY(handles, EcsTransform2D);
+#define FlecsSystemsTransformImportHandles(handles)
 
 #ifdef __cplusplus
 }

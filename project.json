@@ -6,7 +6,7 @@
         "description": "Transform systems for flecs",
         "use": [
             "flecs",
-            "flecs.math",
+            "cglm",
             "flecs.components.transform"
         ]
     }
