@@ -20,4 +20,24 @@ void FlecsSystemsTransformImport(
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+
+namespace flecs {
+namespace systems {
+
+class transform : FlecsSystemsTransform {
+public:
+    transform(flecs::world& ecs) {
+        FlecsSystemsTransformImport(ecs.c_ptr());
+
+        ecs.module<flecs::systems::transform>();
+    }
+};
+
+}
+}
+
+#endif
+
 #endif

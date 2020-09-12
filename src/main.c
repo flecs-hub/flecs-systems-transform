@@ -20,25 +20,25 @@ void EcsApplyTransform3(ecs_iter_t *it) {
 
     if (!m_parent) {
         for (i = 0; i < it->count; i ++) {
-            glm_translate_make(m[i], *(vec3*)&p[i]);
+            glm_translate_make(m[i].value, *(vec3*)&p[i]);
         }
     } else {
         for (i = 0; i < it->count; i ++) {
-            glm_translate_to(*m_parent, *(vec3*)&p[i], m[i]);
+            glm_translate_to(m_parent[0].value, *(vec3*)&p[i], m[i].value);
         }
     }
 
     if (r) {
         for (i = 0; i < it->count; i ++) {
-            glm_rotate(m[i], r[i].x, (vec3){1.0, 0.0, 0.0});
-            glm_rotate(m[i], r[i].y, (vec3){0.0, 1.0, 0.0});
-            glm_rotate(m[i], r[i].z, (vec3){0.0, 0.0, 1.0});
+            glm_rotate(m[i].value, r[i].x, (vec3){1.0, 0.0, 0.0});
+            glm_rotate(m[i].value, r[i].y, (vec3){0.0, 1.0, 0.0});
+            glm_rotate(m[i].value, r[i].z, (vec3){0.0, 0.0, 1.0});
         }
     }
 
     if (s) {
         for (i = 0; i < it->count; i ++) {
-            glm_scale(m[i], *(vec3*)&s[i]);
+            glm_scale(m[i].value, *(vec3*)&s[i]);
         }
     }
 }
@@ -64,5 +64,5 @@ void FlecsSystemsTransformImport(
         flecs.components.transform.Position3,
         ?flecs.components.transform.Rotation3,
         ?flecs.components.transform.Scale3,
-        SYSTEM:EcsHidden);
+        SYSTEM:EcsHidden);      
 }
