@@ -11,7 +11,7 @@ typedef struct FlecsSystemsTransform {
    int dummy;
 } FlecsSystemsTransform;
 
-FLECS_SYSTEMS_TRANSFORM_EXPORT
+FLECS_SYSTEMS_TRANSFORM_API
 void FlecsSystemsTransformImport(
     ecs_world_t *world);
 

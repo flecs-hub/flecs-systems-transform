@@ -9,5 +9,10 @@
             "cglm",
             "flecs.components.transform"
         ]
-    }
+    },
+    "lang.c": {
+        "${os linux}": {
+            "lib": ["m"]
+        }
+    } 
 }

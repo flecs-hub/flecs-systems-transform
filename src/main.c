@@ -19,12 +19,24 @@ void EcsApplyTransform3(ecs_iter_t *it) {
     int i;
 
     if (!m_parent) {
-        for (i = 0; i < it->count; i ++) {
-            glm_translate_make(m[i].value, *(vec3*)&p[i]);
+        if (ecs_is_owned(it, 3)) {
+            for (i = 0; i < it->count; i ++) {
+                glm_translate_make(m[i].value, *(vec3*)&p[i]);
+            }
+        } else {
+            for (i = 0; i < it->count; i ++) {
+                glm_translate_make(m[i].value, *(vec3*)p);
+            }
         }
     } else {
-        for (i = 0; i < it->count; i ++) {
-            glm_translate_to(m_parent[0].value, *(vec3*)&p[i], m[i].value);
+        if (ecs_is_owned(it, 3)) {
+            for (i = 0; i < it->count; i ++) {
+                glm_translate_to(m_parent[0].value, *(vec3*)&p[i], m[i].value);
+            }
+        } else {
+            for (i = 0; i < it->count; i ++) {
+                glm_translate_to(m_parent[0].value, *(vec3*)p, m[i].value);
+            }
         }
     }
 
@@ -52,17 +64,17 @@ void FlecsSystemsTransformImport(
 
     /* System that adds transform matrix to every entity with transformations */
     ECS_SYSTEM(world, EcsAddTransform3, EcsPostLoad,
-        !flecs.components.transform.Transform3,
-        flecs.components.transform.Position3 || 
-        flecs.components.transform.Rotation3 || 
-        flecs.components.transform.Scale3,
+        [out] !flecs.components.transform.Transform3,
+        ANY:flecs.components.transform.Position3 || 
+        ANY:flecs.components.transform.Rotation3 || 
+        ANY:flecs.components.transform.Scale3,
         SYSTEM:EcsHidden);
 
     ECS_SYSTEM(world, EcsApplyTransform3, EcsOnValidate, 
         flecs.components.transform.Transform3,
         CASCADE:flecs.components.transform.Transform3,
-        flecs.components.transform.Position3,
+        ANY:flecs.components.transform.Position3,
         ?flecs.components.transform.Rotation3,
         ?flecs.components.transform.Scale3,
-        SYSTEM:EcsHidden);      
+        SYSTEM:EcsHidden);           
 }
