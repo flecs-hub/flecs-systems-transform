@@ -22,6 +22,7 @@ void FlecsSystemsTransformImport(
 #endif
 
 #ifdef __cplusplus
+#ifndef FLECS_NO_CPP
 
 namespace flecs {
 namespace systems {
@@ -38,6 +39,7 @@ public:
 }
 }
 
+#endif
 #endif
 
 #endif
