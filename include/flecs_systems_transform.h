@@ -7,15 +7,9 @@
 extern "C" {
 #endif
 
-typedef struct FlecsSystemsTransform {
-   int dummy;
-} FlecsSystemsTransform;
-
 FLECS_SYSTEMS_TRANSFORM_API
 void FlecsSystemsTransformImport(
     ecs_world_t *world);
-
-#define FlecsSystemsTransformImportHandles(handles)
 
 #ifdef __cplusplus
 }
@@ -30,8 +24,7 @@ namespace systems {
 class transform : FlecsSystemsTransform {
 public:
     transform(flecs::world& ecs) {
-        FlecsSystemsTransformImport(ecs.c_ptr());
-
+        FlecsSystemsTransformImport(ecs);
         ecs.module<flecs::systems::transform>();
     }
 };
@@ -39,7 +32,7 @@ public:
 }
 }
 
-#endif
-#endif
+#endif // FLECS_NO_CPP
+#endif // __cplusplus
 
 #endif
